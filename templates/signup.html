@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% if messages %}
+ {% for message in messages %}
+  <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}}</p>
+ {% endfor %}
+ {% endif %}
+
+
+<div class="col-sm-10 container col-md-4 border mt-5 py-5 rounded px-4 shadow">
+ <h3 class="text-dark mb-4  ">Become an Author</h3> 
+ 
+ <form action="" method="post" novalidate>
+  {% csrf_token %}
+  {% for fm in form %}
+   <div class="form-group">
+   {{fm.label_tag}} {{fm}} <small class="text-warning">{{fm.errors|striptags}}</small>
+   </div>
+  {% endfor %}
+  <input type="submit" value="Signup" class="btn btn-primary">
+  <p class="mt-2" > I have already , <a href="{% url 'login' %}">login</a></p>
+  {% if form.non_field_errors %}
+   {% for error in form.non_field_errors %}
+    <p class="alert alert-danger my-3">{{error}}</p>
+   {% endfor %}
+  {% endif %}
+ </form>
+</div>
+
+
+
+
+{% endblock body %}

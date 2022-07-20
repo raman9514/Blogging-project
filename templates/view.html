@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div>
+  <a href="{% url 'category' 'Education' %}" class=" bg-danger py-1 px-2 rounded ml-5 text-light"> Education </a>
+  <a href="{% url 'category' 'Job' %}" class=" bg-info py-1 px-2 rounded ml-5 text-light"> Job </a>
+  <a href="{% url 'category' 'Crime' %}" class=" bg-primary py-1 px-2 rounded ml-5 text-light"> Crime </a>
+  <a href="{% url 'category' 'Tech' %}" class=" bg-warning py-1 px-2 rounded ml-5 text-light"> Tech </a>
+  <a href="{% url 'category' 'Socila' %}" class=" bg-dark py-1 px-2 rounded ml-5 text-light"> Socila </a>
+  <a href="{% url 'category' 'Political' %}" class=" bg-info py-1 px-2 rounded ml-5 text-light"> Political </a>
+  <a href="{% url 'category' 'Life_style' %}" class=" bg-primary py-1 px-2 rounded ml-5 text-light"> Life style </a>
+  <a href="{% url 'category' 'Government' %}" class=" bg-warning py-1 px-2 rounded ml-5 text-light"> Government </a>
+</div>
+
+
+<div class="col-sm-10 col-md-12 col-lg-12 container w-75 mt-5 "  >
+
+      <div class="border border-success px-5 pb-3 rounded">
+        <div style="height: 10%;" class=" mb-3">
+            <span> <small>{{post.date}}</small> </span>
+            <span class="float-right"> <p class="text-white bg-info px-3 rounded mt-2">{{post.category}} </p> </span>
+        </div>
+     <div style="height: 80%;">
+        <h2>{{post.title}}</h2>
+            
+            {% if post.image %}
+                <img src="{{post.image.url}}" class="rounded my-3 " height="100%" width="100%">
+            {% endif %}
+              
+
+        <p>{{post.desc}}</p>
+    
+      </div>
+    
+     <div style="height:10% " class="text-right">
+      <p hidden id='share{{post.id}}'>http://127.0.0.1:8000/view/{{post.id}}/</p>
+        <a  onclick="copyToClipboard('#share{{post.id}}')" class="btn btn-primary " > share </a>
+      
+     </div>
+   
+   
+      </div>  
+    
+</div>
+
+
+ <!-- R E C O M M A N D A T I O N -->
+<br><br>
+{% if p_cat %}
+ <div class="container-fluid mt-5">
+   
+     {% for post in p_cat %}
+      <div class="container border-top border border-success mb-2 rounded w-75 pt-3" >
+        <small class="text-muted float-right">{{post.date}} [ {{post.category}} ] </small>
+        <h5  >{{post.title}}</h5>
+        <p>{{post.desc|truncatechars:95}} <a href="{% url 'view' post.id %}">Read</a> </p>
+        <p></p>
+      
+      </div>  
+
+     {% endfor %}
+
+    </div>
+{% endif %}
+
+
+
+
+<script>
+  //copy text 
+
+  
+  function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+
+  alert('coppied');
+    }
+
+
+
+</script>
+
+
+{% endblock body %}
