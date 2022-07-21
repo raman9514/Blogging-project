@@ -25,7 +25,7 @@ SECRET_KEY = 'gw=c&6=9v3k^^%q2!qai**+usebj=xe&g^=s^6!6o&ccdu*t5g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','']
+ALLOWED_HOSTS = ['127.0.0.1','raman-blog.herokuapp.com']
 
 
 # Application definition
